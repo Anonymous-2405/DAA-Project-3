@@ -6,7 +6,7 @@ This project calculates the diameter of random graphs using Dijkstra's Algorithm
 
 - Generates random graphs with adjustable density.
 - Calculates diameter using Dijkstra's Algorithm.
-- Compares execution time with theoretical complexity O(V² log V).
+- Compares execution time with theoretical complexity O(V(V+E).log V).
 
 ## Requirements
 
