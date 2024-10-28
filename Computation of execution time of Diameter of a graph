@@ -1,0 +1,69 @@
+import time
+import random
+
+def floyd_warshall_algo(graph):
+    n = len(graph)  
+  
+    dist = [[float('inf')] * n for _ in range(n)]
+
+    for u in range(n):
+        dist[u][u] = 0  
+
+    for u in range(n):
+        for v, weight in graph[u]:  
+            dist[u][v] = weight  
+
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                if dist[i][k] != float('inf') and dist[k][j] != float('inf'):
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+
+    find_diameter = 0
+    for i in range(n):
+        for j in range(n):
+            if dist[i][j] < float('inf'):
+                find_diameter = max(find_diameter, dist[i][j])
+
+    return find_diameter
+
+def measuring_execution_time(graph):
+    start_time = time.time()  
+    find_diameter = floyd_warshall_algo(graph) 
+    end_time = time.time() 
+
+    execution_time = end_time - start_time  
+    return find_diameter, execution_time
+
+def generate_random_graph(num_vertices, edge_probability=0.3, max_weight=10):
+    graph = [[] for _ in range(num_vertices)]
+    for u in range(num_vertices):
+        for v in range(num_vertices):
+            if u != v and random.random() < edge_probability:
+                weight = random.randint(1, max_weight)
+                graph[u].append((v, weight))
+    return graph
+
+def theoretical_execution_time(n, k=1e-9):
+    return k * (n ** 3)  
+
+if __name__ == "__main__":
+    test_sizes = [100, 200, 300, 400, 500]  
+    edge_probability = 0.1
+    max_weight = 10
+
+    print("Theoretical Execution Times (in seconds):")
+    for size in test_sizes:
+        theoretical_time = theoretical_execution_time(size)
+        print(f"Graph Size: {size} vertices, Theoretical Time: {theoretical_time:.6f} seconds")
+
+    print("\nActual Execution Times:")
+    for size in test_sizes:
+        print(f"\nTesting graph with {size} vertices")
+        graph = generate_random_graph(size, edge_probability, max_weight)
+
+        find_diameter, execution_time = measuring_execution_time(graph)
+
+        print(f"Graph Size: {size} vertices")
+        print(f"Diameter of the graph: {find_diameter}")
+        print(f"Execution time (seconds): {execution_time:.6f}")
