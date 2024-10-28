@@ -1,18 +1,3 @@
-# Graph Diameter Calculation
-
-This project calculates the diameter of random graphs using Dijkstra's Algorithm and measures the execution time to analyze its complexity.
-
-## Features
-
-- Generates random graphs with adjustable density.
-- Calculates diameter using Dijkstra's Algorithm.
-- Compares execution time with theoretical complexity O(V(V+E).log V).
-
-## Requirements
-
-- Python 3.x
-- Libraries: `random`, `time`, `numpy`, `matplotlib`, `heapq`
-
-Install dependencies:
-```bash
-pip install numpy matplotlib
+In this project, we computed execution time for different vertices and also calculated diameter of a graph which is shown in 1st and 2nd file respectively. To apply dynamic programming, the floyd warshall algorithm is taken in consideration to compute diameter of a graph
+Objective :- The diameter of a graph is the maximum shortest path distance between any pair of vertices. We aim to design an efficient algorithm to compute this diameter using dynamic programming. We use the Floyd-Warshall algorithm, a dynamic programming method to find shortest paths between all pairs of vertices. The algorithm iteratively checks if any vertex can act as an intermediate to shorten paths between two other vertices.
+1st program shows the computation of diameter of graph and 2nd program shows computation of execution times of different vertices value using DP
